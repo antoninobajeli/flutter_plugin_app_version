@@ -9,6 +9,38 @@ public class SwiftFlutterPluginAppVersionPlugin: NSObject, FlutterPlugin {
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-    result("iOS " + UIDevice.current.systemVersion)
+    switch (call.method) {
+          case "getPlatformVersion":
+              result("iOS " + UIDevice.current.systemVersion);
+          case "getAppVersionName":
+              result(Bundle.main.releaseVersionNumber);
+          case "getAppVersionName":
+              result(Bundle.main.buildVersionNumber);
+          case "getAppID":
+              if let bundleIdentifier = Bundle.main.bundleIdentifier {
+                  result(bundleIdentifier) //Your App ID on App Store
+              } else {
+                  result("No App ID Found")
+              }
+
+          default:
+              result(FlutterMethodNotImplemented)
+    }
   }
+
+}
+
+
+
+extension Bundle {
+    var releaseVersionNumber: String? {
+        return infoDictionary?["CFBundleShortVersionString"] as? String
+    }
+    var buildVersionNumber: String? {
+        return infoDictionary?["CFBundleVersion"] as? String
+    }
+}
+
+
+
 }
