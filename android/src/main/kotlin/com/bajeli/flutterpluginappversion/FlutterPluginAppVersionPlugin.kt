@@ -19,11 +19,11 @@ class FlutterPluginAppVersionPlugin(): MethodCallHandler {
     if (call.method.equals("getPlatformVersion")) {
       result.success("Android ${android.os.Build.VERSION.RELEASE}")
     } else if (call.method.equals("getAppVersionName")) {
-      result.success("${BuildConfig.VERSION_NAME}")
+      result.success("vname ${BuildConfig.VERSION_NAME}")
     } else if (call.method.equals("getAppCodeName")) {
-      result.success("${BuildConfig.VERSION_CODE}")
+      result.success("vcode ${BuildConfig.VERSION_CODE}")
     } else if (call.method.equals("getAppID")) {
-      result.success("${BuildConfig.APPLICATION_ID}")
+      result.success("id ${BuildConfig.APPLICATION_ID}")
     } else{
       result.notImplemented()
     }
